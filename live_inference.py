@@ -1,7 +1,7 @@
 """
 GlassesDet — Real-Time Webcam Inference
 
-Runs the fine-tuned YOLO12m GlassesDet model on a live webcam feed.
+Runs the exported YOLO12m GlassesDet ONNX model on a live webcam feed.
 
 Classes:
     0 - not_wearing_glasses
@@ -23,15 +23,14 @@ from ultralytics import YOLO
 # ============================================================
 
 MODEL_PATH = Path(
-    r"runs\detect\runs\yolo12m_glassesdet_notebook"
-    r"\weights\best.pt"
+    r"./exported_wights/Yolo12m_GlassesDetector_V1.onnx"
 )
 
 CAMERA_ID = 0
 CONFIDENCE_THRESHOLD = 0.30
 IMAGE_SIZE = 640
 
-WINDOW_NAME = "GlassesDet - YOLO12m Live Inference"
+WINDOW_NAME = "GlassesDet - YOLO12m ONNX Live Inference"
 
 
 # ============================================================
@@ -46,27 +45,28 @@ def main():
 
     if not MODEL_PATH.exists():
         raise FileNotFoundError(
-            f"Model checkpoint not found:\n{MODEL_PATH}"
+            f"ONNX model not found:\n{MODEL_PATH}"
         )
 
     print("=" * 70)
-    print("GLASSESDET — REAL-TIME YOLO12M INFERENCE")
+    print("GLASSESDET — REAL-TIME YOLO12M ONNX INFERENCE")
     print("=" * 70)
 
     print(f"Model      : {MODEL_PATH}")
+    print(f"Backend    : ONNX")
     print(f"Camera     : {CAMERA_ID}")
     print(f"Confidence : {CONFIDENCE_THRESHOLD}")
     print(f"Image size : {IMAGE_SIZE}")
 
     # --------------------------------------------------------
-    # Load trained model
+    # Load exported ONNX model
     # --------------------------------------------------------
 
-    print("\nLoading model...")
+    print("\nLoading ONNX model...")
 
-    model = YOLO(str(MODEL_PATH))
+    model = YOLO(str(MODEL_PATH), task="detect")
 
-    print("Model loaded successfully.")
+    print("ONNX model loaded successfully.")
 
     print("\nClasses:")
 
@@ -107,7 +107,7 @@ def main():
                 break
 
             # ------------------------------------------------
-            # YOLO inference
+            # ONNX inference
             # ------------------------------------------------
 
             results = model.predict(
@@ -118,7 +118,7 @@ def main():
                 verbose=False,
             )
 
-            # Draw YOLO detections
+            # Draw detections
             annotated_frame = results[0].plot()
 
             # ------------------------------------------------
@@ -157,7 +157,7 @@ def main():
                 annotated_frame,
             )
 
-            # Q -> quit
+            # Press Q to quit
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
