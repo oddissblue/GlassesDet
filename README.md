@@ -128,4 +128,4 @@ The demo runs the trained model on the default webcam and shows the detections a
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
 - [Glasses Detection (YOLO format)](https://www.kaggle.com/datasets/mohamedchahed/glasses-detection-yolo-format) dataset by mohamedchahed
 - [Albumentations](https://albumentations.ai/)
-- ![SDAIA Acedemy]([github.com/SDAIAAcademy](https://github.com/SDAIAAcademy))
+- [SDAIA Acedemy](https://github.com/SDAIAAcademy)
