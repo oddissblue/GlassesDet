@@ -8,11 +8,11 @@ The project starts from pretrained YOLO12m weights (Ultralytics) and fine-tunes 
 
 Evaluation of the best checkpoint on the held-out test set (15 original images):
 
-| Class               | Precision | Recall | F1    | mAP@0.5 | mAP@0.5:0.95 |
-|---------------------|----------:|-------:|------:|--------:|-------------:|
-| not_wearing_glasses | 0.732     | 0.714  | 0.723 | 0.820   | 0.410        |
-| wearing_glasses     | 0.874     | 0.865  | 0.869 | 0.827   | 0.436        |
-| All                 | 0.803     | 0.790  | 0.796 | 0.823   | 0.423        |
+| Class               | Precision | Recall |    F1 | mAP@0.5 | mAP@0.5:0.95 |
+| ------------------- | --------: | -----: | ----: | ------: | -----------: |
+| not_wearing_glasses |     0.732 |  0.714 | 0.723 |   0.820 |        0.410 |
+| wearing_glasses     |     0.874 |  0.865 | 0.869 |   0.827 |        0.436 |
+| All                 |     0.803 |  0.790 | 0.796 |   0.823 |        0.423 |
 
 Inference takes about 20 ms per image at 640x640 on an RTX 4090 Laptop GPU.
 
@@ -79,11 +79,11 @@ uv run python utils/resplit_and_augment.py
 
 This script pools all images and makes a stratified 80/10/10 split (seed 42). It then augments only the training set, using horizontal flips, color jitter, blur and noise, and affine transforms from Albumentations, which grows it from 107 to 321 images. The validation and test sets contain only original images. The dataset location is set by `DATASET_DIR` at the top of the script.
 
-| Split      | Images |
-|------------|-------:|
+| Split      |             Images |
+| ---------- | -----------------: |
 | Train      | 321 (107 original) |
-| Validation | 12     |
-| Test       | 15     |
+| Validation |                 12 |
+| Test       |                 15 |
 
 ## Training and evaluation
 
@@ -98,14 +98,14 @@ All training and evaluation steps are in `Notebook_GlassesDet.ipynb`:
 
 Training configuration:
 
-| Parameter      | Value                              |
-|----------------|------------------------------------|
-| Base model     | YOLO12m (pretrained)               |
-| Image size     | 640                                |
-| Batch size     | 8                                  |
-| Epochs         | 100 max, early stopping patience 20 |
-| Optimizer      | AdamW, lr 0.001                    |
-| Seed           | 42                                 |
+| Parameter  | Value                               |
+| ---------- | ----------------------------------- |
+| Base model | YOLO12m (pretrained)                |
+| Image size | 640                                 |
+| Batch size | 8                                   |
+| Epochs     | 100 max, early stopping patience 20 |
+| Optimizer  | AdamW, lr 0.001                     |
+| Seed       | 42                                  |
 
 The best checkpoint is saved to `runs/detect/runs/yolo12m_glassesdet_notebook/weights/best.pt`.
 
@@ -128,3 +128,4 @@ The demo runs the trained model on the default webcam and shows the detections a
 - [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
 - [Glasses Detection (YOLO format)](https://www.kaggle.com/datasets/mohamedchahed/glasses-detection-yolo-format) dataset by mohamedchahed
 - [Albumentations](https://albumentations.ai/)
+- ![SDAIA Acedemy]([github.com/SDAIAAcademy](https://github.com/SDAIAAcademy))
